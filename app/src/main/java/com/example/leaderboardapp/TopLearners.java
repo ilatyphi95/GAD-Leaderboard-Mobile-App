@@ -1,7 +1,7 @@
 package com.example.leaderboardapp;
 
-public class TopLearner {
-    public static final String URL = "hours";
+public class TopLearners {
+    public static final String URL = "/api/hours";
 
     private String name;
     private String hours;
