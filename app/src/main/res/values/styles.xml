@@ -8,4 +8,10 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="CustomEditText" parent="Widget.AppCompat.EditText">
+        <item name="android:background">@drawable/edit_text_background</item>
+        <item name="android:layout_height">@dimen/edit_text_height</item>
+        <item name="android:paddingStart">8dp</item>
+    </style>
+
 </resources>
