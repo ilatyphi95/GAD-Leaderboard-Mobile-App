@@ -1,4 +1,4 @@
-package com.example.leaderboardapp;
+package com.example.leaderboardapp.adapters;
 
 import android.content.Context;
 import android.net.Uri;
@@ -11,6 +11,10 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.leaderboardapp.R;
+import com.example.leaderboardapp.models.GADLeaderboard;
+import com.example.leaderboardapp.models.TopLearners;
+import com.example.leaderboardapp.models.TopSkillPoints;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
