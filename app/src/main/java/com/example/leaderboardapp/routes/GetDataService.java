@@ -1,4 +1,7 @@
-package com.example.leaderboardapp;
+package com.example.leaderboardapp.routes;
+
+import com.example.leaderboardapp.models.TopLearners;
+import com.example.leaderboardapp.models.TopSkillPoints;
 
 import java.util.List;
 

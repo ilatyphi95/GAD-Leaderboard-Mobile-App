@@ -1,4 +1,4 @@
-package com.example.leaderboardapp;
+package com.example.leaderboardapp.models;
 
 import java.util.List;
 
