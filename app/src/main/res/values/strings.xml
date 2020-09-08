@@ -4,4 +4,13 @@
     <string name="dummy_name">Pharis Muigai</string>
     <string name="dummy_details">223 learning hours, Kenya</string>
     <string name="content_descr">Learner icon</string>
+    <string name="first_name_hint">First Name</string>
+    <string name="last_name_hint">Last Name</string>
+    <string name="email_hint">Email</string>
+    <string name="link_hint">Project on GITHUB (link)</string>
+    <string name="submission_title">Project Submission</string>
+    <string name="yes">Yes</string>
+    <string name="confirm">Are you sure ?</string>
+
+    <integer name="dialog_margin">120</integer>
 </resources>
