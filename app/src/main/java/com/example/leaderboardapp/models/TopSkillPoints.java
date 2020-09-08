@@ -1,10 +1,10 @@
-package com.example.leaderboardapp;
+package com.example.leaderboardapp.models;
 
-public class TopLearners {
-    public static final String URL = "/api/hours";
+public class TopSkillPoints {
+    public static final String URL = "/api/skilliq";
 
     private String name;
-    private String hours;
+    private String score;
     private String country;
     private String badgeUrl;
 
@@ -17,6 +17,6 @@ public class TopLearners {
     }
 
     public String getDetails() {
-        return hours + " learning hours, " + country;
+        return score + " skill IQ Score, " + country;
     }
 }
