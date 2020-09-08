@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="toolbar_height">40dp</dimen>
+    <dimen name="spacing">64dp</dimen>
+    <dimen name="edit_text_height">50dp</dimen>
+</resources>
