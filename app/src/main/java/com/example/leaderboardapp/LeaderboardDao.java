@@ -10,7 +10,7 @@ import com.example.leaderboardapp.models.TopSkillPoints;
 import java.util.List;
 
 @Dao
-public interface LeaderboardDoa {
+public interface LeaderboardDao {
 
     @Query("SELECT * FROM TopLearner")
     List<TopLearner> getAllTopLearners();

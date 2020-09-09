@@ -11,7 +11,7 @@ import com.example.leaderboardapp.models.TopSkillPoints;
 
 @Database(entities = {TopLearner.class, TopSkillPoints.class}, version = 1)
 public abstract class LeaderboardDatabase extends RoomDatabase {
-    public abstract LeaderboardDoa mLeaderboardDoa();
+    public abstract LeaderboardDao mLeaderboardDao();
 
     private static LeaderboardDatabase INSTANCE;
 
