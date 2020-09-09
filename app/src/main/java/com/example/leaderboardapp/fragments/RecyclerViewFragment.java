@@ -1,5 +1,6 @@
 package com.example.leaderboardapp.fragments;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,7 +16,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import com.example.leaderboardapp.adapters.LeaderboardRecyclerAdapter;
 import com.example.leaderboardapp.OnSwipeRefreshListener;
 import com.example.leaderboardapp.R;
-import com.example.leaderboardapp.models.TopLearners;
+import com.example.leaderboardapp.models.TopLearner;
 import com.example.leaderboardapp.models.TopSkillPoints;
 
 import java.util.List;
@@ -27,18 +28,20 @@ public class RecyclerViewFragment extends Fragment {
 
     public RecyclerViewFragment() {}
 
-    public RecyclerViewFragment(OnSwipeRefreshListener refreshListener) {
-        mRefreshListener = refreshListener;
-    }
-
-    public void setTopLearnersList(List<TopLearners> topLearnersList) {
+    public void setTopLearnersList(List<TopLearner> topLearnerList) {
         if (mAdapter != null)
-            mAdapter.setTopLearners(topLearnersList);
+            mAdapter.setTopLearners(topLearnerList);
     }
 
     public void setTopSkillPointsList(List<TopSkillPoints> topSkillPointsList) {
         if (mAdapter != null)
             mAdapter.setTopSkillPoints(topSkillPointsList);
+    }
+
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        mRefreshListener = (OnSwipeRefreshListener) context;
     }
 
     @Nullable

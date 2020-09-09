@@ -9,11 +9,14 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
+import com.example.leaderboardapp.LeaderboardDatabaseUtils;
 import com.example.leaderboardapp.MainActivity;
 import com.example.leaderboardapp.fragments.RecyclerViewFragment;
-import com.example.leaderboardapp.models.TopLearners;
+import com.example.leaderboardapp.models.TopLearner;
 import com.example.leaderboardapp.models.TopSkillPoints;
 import com.example.leaderboardapp.routes.GetDataService;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import java.util.List;
 
@@ -47,7 +50,7 @@ public class LeaderboardViewPagerAdapter extends FragmentPagerAdapter {
     @NonNull
     @Override
     public Fragment getItem(int position) {
-        return new RecyclerViewFragment(mActivity);
+        return new RecyclerViewFragment();
     }
 
     @Override
@@ -72,13 +75,15 @@ public class LeaderboardViewPagerAdapter extends FragmentPagerAdapter {
         mTopLearnersFinished = false;
         mTopSkillPointsFinished = false;
 
+        Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
+
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(BASE_URL)
-                .addConverterFactory(GsonConverterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create(gson))
                 .build();
 
         GetDataService service = retrofit.create(GetDataService.class);
-        Call<List<TopLearners>> topLearners = service.getTopLearners();
+        Call<List<TopLearner>> topLearners = service.getTopLearners();
         Call<List<TopSkillPoints>> topSkillPoints = service.getTopSkillIQs();
 
         mTopLearnersFinished = false;
@@ -86,20 +91,22 @@ public class LeaderboardViewPagerAdapter extends FragmentPagerAdapter {
 
         mProgressBar.setVisibility(View.VISIBLE);
 
-        topLearners.enqueue(new Callback<List<TopLearners>>() {
+        topLearners.enqueue(new Callback<List<TopLearner>>() {
             @Override
-            public void onResponse(Call<List<TopLearners>> call, Response<List<TopLearners>> response) {
+            public void onResponse(Call<List<TopLearner>> call, Response<List<TopLearner>> response) {
                 RecyclerViewFragment topLearnersFragment = (RecyclerViewFragment) getFragment(TOP_LEARNERS);
-                List<TopLearners> topLearnersList = response.body();
-                topLearnersFragment.setTopLearnersList(topLearnersList);
-                mActivity.mViewModel.setTopLearners(topLearnersList);
+                List<TopLearner> topLearnerList = response.body();
+                LeaderboardDatabaseUtils.insertTopLearners(topLearnerList);
+                topLearnersFragment.setTopLearnersList(topLearnerList);
+                mActivity.mViewModel.setTopLearners(topLearnerList);
                 mTopLearnersFinished = true;
                 dismiss();
             }
 
             @Override
-            public void onFailure(Call<List<TopLearners>> call, Throwable t) {
+            public void onFailure(Call<List<TopLearner>> call, Throwable t) {
                 mTopLearnersFinished = true;
+                mActivity.restoreCachedData();
                 dismiss();
             }
         });
@@ -109,6 +116,7 @@ public class LeaderboardViewPagerAdapter extends FragmentPagerAdapter {
             public void onResponse(Call<List<TopSkillPoints>> call, Response<List<TopSkillPoints>> response) {
                 RecyclerViewFragment topSkillPointsFragment = (RecyclerViewFragment) getFragment(TOP_SKILL_IQS);
                 List<TopSkillPoints> topSkillPointsList = response.body();
+                LeaderboardDatabaseUtils.insertTopSkillPoints(topSkillPointsList);
                 topSkillPointsFragment.setTopSkillPointsList(topSkillPointsList);
                 mActivity.mViewModel.setTopSkillPoints(topSkillPointsList);
                 mTopSkillPointsFinished = true;
@@ -118,6 +126,7 @@ public class LeaderboardViewPagerAdapter extends FragmentPagerAdapter {
             @Override
             public void onFailure(Call<List<TopSkillPoints>> call, Throwable t) {
                 mTopSkillPointsFinished = true;
+                mActivity.restoreCachedData();
                 dismiss();
             }
         });

@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.leaderboardapp.R;
 import com.example.leaderboardapp.models.GADLeaderboard;
-import com.example.leaderboardapp.models.TopLearners;
+import com.example.leaderboardapp.models.TopLearner;
 import com.example.leaderboardapp.models.TopSkillPoints;
 import com.squareup.picasso.Picasso;
 
@@ -23,8 +23,8 @@ public class LeaderboardRecyclerAdapter extends RecyclerView.Adapter<Leaderboard
 
     private GADLeaderboard mLeaderboard = new GADLeaderboard();
 
-    public void setTopLearners(List<TopLearners> topLearnersList) {
-        mLeaderboard.mTopLearners = topLearnersList;
+    public void setTopLearners(List<TopLearner> topLearnerList) {
+        mLeaderboard.mTopLearners = topLearnerList;
         notifyDataSetChanged();
     }
 
@@ -75,7 +75,7 @@ public class LeaderboardRecyclerAdapter extends RecyclerView.Adapter<Leaderboard
             String details;
             String badgeUrl;
             if (mLeaderboard.mTopLearners != null) {
-                TopLearners topLearner = mLeaderboard.mTopLearners.get(position);
+                TopLearner topLearner = mLeaderboard.mTopLearners.get(position);
                 name = topLearner.getName();
                 details = topLearner.getDetails();
                 badgeUrl = topLearner.getBadgeUrl();
