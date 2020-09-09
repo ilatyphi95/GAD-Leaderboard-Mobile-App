@@ -85,7 +85,7 @@ public class SubmitActivity extends AppCompatActivity {
         String link = etLink.getText().toString();
 
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://192.168.43.92:8080")
+                .baseUrl("https://docs.google.com/forms/d/e/")
                 .build();
 
         SubmitProjectService service = retrofit.create(SubmitProjectService.class);
