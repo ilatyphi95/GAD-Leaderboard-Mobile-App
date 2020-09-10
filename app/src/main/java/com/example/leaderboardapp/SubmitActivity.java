@@ -63,7 +63,7 @@ public class SubmitActivity extends AppCompatActivity {
             etEmail.setError(errMessage);
             return false;
         }
-        else if (!etEmail.getText().toString().matches("\\w+@\\w+\\.\\w+")) {
+        else if (!etEmail.getText().toString().matches("[\\w.]+@[\\w.]+\\.\\w+")) {
             etEmail.setError("Invalid email");
             return false;
         }
